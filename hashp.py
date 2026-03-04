@@ -2,7 +2,7 @@ import hashlib
 import os
 import re
 class user:
-    def user(self, username, password_hash):
+    def __init__(self, username, password_hash):
         self.username=username
         self.password_hash=password_hash
 
@@ -42,12 +42,12 @@ class passwordsecurity:
 
 class authenticationsystem:
     
-    def user (self):
-        self.users={}
+    def __init__ (self):
+        self.user={}
 
         #register user
     def register(self, username, password):
-        if username in self.users:
+        if username in self.user:
             print("username already exists.")
             return
 
@@ -60,23 +60,23 @@ class authenticationsystem:
         hashed_password=passwordsecurity.hash_password(password)
 
         #store hashed password 
-        self.users[username]=user(username, hashed_password)
+        self.user[username]=user(username, hashed_password)
         print("user registered securely.")
 
         #authenticate login
         def login(self,username, password):
 
-            if username not in self.users:
+            if username not in self.user:
                 print("user not found.")
                 return
-            user=self.users[username]
+            user=self.user[username]
 
             if passwordsecurity.verify_password(user.password_hash, password):
                 print("Auntheticatation successful. Access granted.")
             else:
                 print("Authentication failed. Incorrect password.")
 
-auth=AuthenticationSystem()
+auth=authenticationsystem()
 
 while True:
     print("\n1. Register")
